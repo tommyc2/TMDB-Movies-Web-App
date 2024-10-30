@@ -14,6 +14,7 @@ import UpcomingMoviesPage from "./pages/upcomingMovies";
 import TrendingMoviesPage from "./pages/trendingMoviesPage";
 import RecommendedMoviesPage from "./pages/recommendedMoviesPage"
 import SimilarMoviesPage from "./pages/similarMoviesPage";
+import AnimatedCursor from "react-animated-cursor"
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -29,6 +30,22 @@ const App = () => {
     return (
         <QueryClientProvider client={queryClient}>
         <BrowserRouter>
+        <AnimatedCursor
+            innerSize={15}
+            outerSize={45}
+            innerScale={1}
+            outerScale={2}
+            outerAlpha={0}
+            hasBlendMode={true}
+            innerStyle={{
+                backgroundColor: 'black',
+                zIndex: 9999
+            }}
+            outerStyle={{
+                border: '3px solid black',
+                zIndex: 9999
+            }}
+        />
             <SiteHeader />
             <MoviesContextProvider>
             <Routes>
@@ -47,6 +64,7 @@ const App = () => {
         </BrowserRouter>
             <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
+
     );
 };
 
