@@ -8,6 +8,7 @@ import AddToFavoritesIcon from '../components/cardIcons/addToFavorites'
 const HomePage = () => {
 
     const {  data, error, isLoading, isError }  = useQuery('discover', getMovies)
+    const getReleaseDate = (date) => { return new Date(date); };
 
     if (isLoading) {
         return <Spinner />
@@ -21,6 +22,13 @@ const HomePage = () => {
     // Redundant, but necessary to avoid app crashing.
     const favorites = movies.filter(m => m.favorite)
     localStorage.setItem('favorites', JSON.stringify(favorites))
+
+    movies.sort( (movie1,movie2) => {
+        return getReleaseDate(movie2.release_date) - getReleaseDate(movie1.release_date)
+    });
+
+    console.log("Movies sorted from latest to oldest")
+
 
     return (
         <PageTemplate

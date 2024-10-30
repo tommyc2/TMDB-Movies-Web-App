@@ -6,7 +6,7 @@ import Spinner from '../components/spinner';
 import AddToFavoritesIcon from '../components/cardIcons/addToFavorites'
 import AddToWatchListIcon from "../components/cardIcons/addToWatchList";
 
-const TrendingMoviesPage = (props) => {
+const TrendingMoviesPage = () => {
 
     const {  data, error, isLoading, isError }  = useQuery('trending', getTrendingMovies)
 

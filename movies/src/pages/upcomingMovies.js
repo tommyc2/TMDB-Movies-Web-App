@@ -6,9 +6,10 @@ import Spinner from '../components/spinner';
 import AddToFavoritesIcon from '../components/cardIcons/addToFavorites'
 import AddToWatchListIcon from "../components/cardIcons/addToWatchList";
 
-const UpcomingMoviesPage = (props) => {
+const UpcomingMoviesPage = () => {
 
     const {  data, error, isLoading, isError }  = useQuery('upcoming', getUpcomingMovies)
+    const getReleaseDate = (date) => { return new Date(date); };
 
     if (isLoading) { return <Spinner /> }
     if (isError) { return <h1>{error.message}</h1> }
@@ -18,6 +19,13 @@ const UpcomingMoviesPage = (props) => {
   // Redundant, but necessary to avoid app crashing.
   const favorites = movies.filter(m => m.favorite)
   localStorage.setItem('favorites', JSON.stringify(favorites))
+
+  movies.sort( (movie1,movie2) => {
+    return getReleaseDate(movie2.release_date) - getReleaseDate(movie1.release_date)
+    });
+
+    console.log("Movies sorted from latest to oldest")
+
 
     return (
         <PageTemplate

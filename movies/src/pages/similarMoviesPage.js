@@ -9,6 +9,7 @@ import AddToFavoritesIcon from '../components/cardIcons/addToFavorites'
 const SimilarMoviesPage = () => {
 
     const { id } = useParams();
+    const getReleaseDate = (date) => { return new Date(date); };
 
     const { data, error, isLoading, isError } = useQuery(
         ["movie", { id: id }],
@@ -23,6 +24,12 @@ const SimilarMoviesPage = () => {
     // Redundant, but necessary to avoid app crashing.
     const favorites = similarMovies.filter(m => m.favorite)
     localStorage.setItem('favorites', JSON.stringify(favorites))
+
+    similarMovies.sort( (movie1,movie2) => {
+        return getReleaseDate(movie2.release_date) - getReleaseDate(movie1.release_date)
+    });
+
+    console.log("Movies sorted from latest to oldest")
 
     return (
         <PageTemplate
