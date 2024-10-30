@@ -9,8 +9,11 @@ import Fab from "@mui/material/Fab";
 import Typography from "@mui/material/Typography";
 import Drawer from "@mui/material/Drawer";
 import MovieReviews from "../movieReviews"
-import { Global } from "@emotion/react";
 import LanguageIcon from '@mui/icons-material/Language';
+import Button from '@mui/material/Button'
+import { useParams } from 'react-router-dom';
+import RecommendedMoviesPage from "../../pages/recommendedMoviesPage";
+import { useNavigate } from 'react-router-dom';
 
 
 const root = {

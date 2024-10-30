@@ -1,22 +1,24 @@
 import React from "react";
-import { getMovies } from "../api/tmdb-api";
+import { getRecommendedMovies } from "../api/tmdb-api";
 import PageTemplate from '../components/templateMovieListPage';
 import { useQuery } from 'react-query';
 import Spinner from '../components/spinner';
+import { useParams } from 'react-router-dom';
 import AddToFavoritesIcon from '../components/cardIcons/addToFavorites'
 
-const HomePage = () => {
+const RecommendedMoviesPage = () => {
 
-    const {  data, error, isLoading, isError }  = useQuery('discover', getMovies)
+    const { id } = useParams();
 
-    if (isLoading) {
-        return <Spinner />
-    }
+    const { data, error, isLoading, isError } = useQuery(
+        ["movie", { id: id }],
+        getRecommendedMovies
+    );
 
-    if (isError) {
-        return <h1>{error.message}</h1>
-    }
-    const movies = data.results;
+    if (isLoading) { return <Spinner /> }
+    if (isError) { return <h1>{error.message}</h1> }
+
+    const movies = data.results; // movie objects
 
     // Redundant, but necessary to avoid app crashing.
     const favorites = movies.filter(m => m.favorite)
@@ -24,7 +26,7 @@ const HomePage = () => {
 
     return (
         <PageTemplate
-            title="Discover Movies"
+            title="Recommended Movies"
             movies={movies}
             action={(movie) => {
                 return <AddToFavoritesIcon movie={movie} />
@@ -32,5 +34,6 @@ const HomePage = () => {
         />
     );
 };
-export default HomePage;
+
+export default RecommendedMoviesPage;
 

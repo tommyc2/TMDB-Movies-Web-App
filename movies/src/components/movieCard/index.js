@@ -15,6 +15,7 @@ import { Link } from "react-router-dom";
 import Avatar from '@mui/material/Avatar';
 import React, { useContext  } from "react";
 import { MoviesContext } from "../../contexts/moviesContext";
+import { Stack } from "@mui/material";
 
 
 export default function MovieCard({ movie, action }) {
@@ -44,7 +45,7 @@ export default function MovieCard({ movie, action }) {
                 }
             />
             <CardMedia
-                sx={{ height: 500 }}
+                sx={{ height: 300 }}
                 image={
                     movie.poster_path
                         ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
@@ -67,17 +68,39 @@ export default function MovieCard({ movie, action }) {
                     </Grid>
                 </Grid>
             </CardContent>
+
             <CardActions disableSpacing>
+                <Grid container spacing={2}>
 
-                {action(movie)}
+                    <Grid size={12}>
+                        {action(movie)}
 
-                <Link to={`/movies/${movie.id}`}>
-                    <Button variant="outlined" size="medium" color="primary">
-                        More Info ...
-                    </Button>
-                </Link>
+                        <Link to={`/movies/${movie.id}`}>
+                            <Button variant="outlined" color="primary">
+                            More Info ...
+                            </Button>
+                        </Link>
+                    </Grid>
+                    
+                    <Grid size={6}>
+                        <Link to={`/movies/${movie.id}/recommendations`}>
+                            <Button variant="contained" color="primary">
+                                Recommended Movies
+                            </Button>
+                        </Link>
+                    </Grid>
 
+                    <Grid size={6}>
+                        <Link to={`/movies/${movie.id}/similar`}>
+                        <Button variant="contained" color="secondary">
+                            Similar Movies
+                        </Button>
+                        </Link>
+                    </Grid>
+
+                </Grid>
             </CardActions>
+
         </Card>
     );
 }
