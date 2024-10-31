@@ -11,10 +11,15 @@ import { useNavigate } from "react-router-dom";
 import { styled } from '@mui/material/styles';
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { useUser, SignedIn, UserButton } from "@clerk/clerk-react";
+
 
 const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
 
 const SiteHeader = ({ history }) => {
+
+    const { isSignedIn, user, isLoaded } = useUser()
+
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
 
@@ -24,7 +29,7 @@ const SiteHeader = ({ history }) => {
     const navigate = useNavigate();
 
     const menuOptions = [
-        { label: "Home", path: "/" },
+        { label: "Home", path: "/homepage" },
         { label: "Favorites", path: "/movies/favorites" },
         { label: "Upcoming Movies", path: "/movies/upcoming" },
         { label: "Trending Today", path: "/movies/trending" },
@@ -43,11 +48,11 @@ const SiteHeader = ({ history }) => {
             <AppBar position="fixed" color="secondary">
                 <Toolbar>
                     <Typography variant="h4" sx={{ flexGrow: 1 }}>
-                        TMDB Client
+                        TMDB Movies Web App
                     </Typography>
-                    <Typography variant="h6" sx={{ flexGrow: 1 }}>
-                        All you ever wanted to know about Movies!
-                    </Typography>
+                    <SignedIn>
+                        <UserButton showName="true" appearance={{variables: {colorText: "white", fontSize: "1rem"}}}/>
+                    </SignedIn>
                     {isMobile ? (
                         <>
                             <IconButton

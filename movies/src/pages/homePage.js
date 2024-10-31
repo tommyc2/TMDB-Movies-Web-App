@@ -29,7 +29,6 @@ const HomePage = () => {
 
     console.log("Movies sorted from latest to oldest")
 
-
     return (
         <PageTemplate
             title="Discover Movies"

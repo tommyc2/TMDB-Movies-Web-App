@@ -15,6 +15,15 @@ import TrendingMoviesPage from "./pages/trendingMoviesPage";
 import RecommendedMoviesPage from "./pages/recommendedMoviesPage"
 import SimilarMoviesPage from "./pages/similarMoviesPage";
 import AnimatedCursor from "react-animated-cursor"
+import { ClerkProvider, SignIn, SignUp } from '@clerk/clerk-react'
+import AuthenticationCheck from "./components/auth";
+import { SignedIn, SignedOut, RedirectToSignIn, RedirectToSignUp } from "@clerk/clerk-react";
+
+const clerk_key = process.env.REACT_APP_CLERK_PUBLISHABLE_KEY
+
+if (!clerk_key) {
+  throw new Error("Missing Publishable Key")
+}
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -47,18 +56,26 @@ const App = () => {
             }}
         />
             <SiteHeader />
+            
             <MoviesContextProvider>
             <Routes>
-                <Route path="/reviews/:id" element={ <MovieReviewPage /> } />
-                <Route path="/movies/favorites" element={<FavoriteMoviesPage />} />
-                <Route path="/movies/:id" element={<MoviePage />} />
-                <Route path="/" element={<HomePage />} />
-                <Route path="/movies/upcoming" element={<UpcomingMoviesPage />} />
-                <Route path="*" element={ <Navigate to="/" /> } />
-                <Route path="/reviews/form" element={ <AddMovieReviewPage /> } />
-                <Route path="/movies/trending" element={<TrendingMoviesPage />} />
-                <Route path="/movies/:id/recommendations" element={<RecommendedMoviesPage />} />
-                <Route path="/movies/:id/similar" element={<SimilarMoviesPage />} />
+
+                <Route path="/sign-in" element={<SignIn signUpUrl="/sign-up" />} />
+                <Route path="/sign-up" element={<SignUp signInUrl="/sign-in" />} />
+
+                <Route element={<AuthenticationCheck />}>
+                    <Route path="/reviews/:id" element={ <MovieReviewPage /> } />
+                    <Route path="/movies/favorites" element={<FavoriteMoviesPage />} />
+                    <Route path="/movies/:id" element={<MoviePage />} />
+                    <Route path="/homepage" element={<HomePage />} />
+                    <Route path="/movies/upcoming" element={<UpcomingMoviesPage />} />
+                    <Route path="*" element={ <Navigate to="/" /> } />
+                    <Route path="/reviews/form" element={ <AddMovieReviewPage /> } />
+                    <Route path="/movies/trending" element={<TrendingMoviesPage />} />
+                    <Route path="/movies/:id/recommendations" element={<RecommendedMoviesPage />} />
+                    <Route path="/movies/:id/similar" element={<SimilarMoviesPage />} />
+                </Route>
+
             </Routes>
             </MoviesContextProvider>
         </BrowserRouter>
@@ -69,4 +86,12 @@ const App = () => {
 };
 
 const rootElement = createRoot( document.getElementById("root") )
-rootElement.render(<App />);
+rootElement.render(
+    <ClerkProvider
+      publishableKey={clerk_key}
+      signInFallbackRedirectUrl="/sign-in"
+      signUpFallbackRedirectUrl="/sign-up"
+    >
+        <App />
+    </ClerkProvider>
+);
