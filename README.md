@@ -22,6 +22,7 @@ A third-party authentication service was integrated at a later stage to allow us
 + Similar Movies List (parameterised endpoint) for each movie
 + Sorting of movies by year (latest to oldest) for each static/parameterised endoint
 + React Query caching for each static/parameterised url
++ Animated Blob cursor
 
 ## Setup requirements
 
@@ -95,3 +96,5 @@ In order to implement the Third-Party authentication piece, <b>Clerk</b> was use
 The documentation was very detailed and helped massively in the implementing this part of the project.
 
 As multiple routes needed to be protected, I wrapped the routes within a route (https://medium.com/@dennisivy/creating-protected-routes-with-react-router-v6-2c4bbaf7bc1c). 
+
+In addition to this, an animated cursor was used in the UI revamp section using this library (https://github.com/stephenscaff/react-animated-cursor/blob/master/readme.md)
