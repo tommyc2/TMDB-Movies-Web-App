@@ -6,6 +6,8 @@
 
 <b>Course: </b>BSc Applied Computing (W2)
 
+![alt text](<Screenshot from 2024-11-01 13-48-24.png>)
+
 ## Overview
 
 This is a React JS application using the TMDB API to fetch movies (upcoming, trending, recommended, similar etc) and display them on a user-friendly dashboard. It utilises several React Hooks, particularly useState, useEffect, useContext (to avoid prop-drilling) & useNavigate.
@@ -93,6 +95,3 @@ In order to implement the Third-Party authentication piece, <b>Clerk</b> was use
 The documentation was very detailed and helped massively in the implementing this part of the project.
 
 As multiple routes needed to be protected, I wrapped the routes within a route (https://medium.com/@dennisivy/creating-protected-routes-with-react-router-v6-2c4bbaf7bc1c). 
-
-
-
