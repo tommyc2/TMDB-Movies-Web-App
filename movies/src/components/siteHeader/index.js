@@ -29,7 +29,7 @@ const SiteHeader = ({ history }) => {
     const navigate = useNavigate();
 
     const menuOptions = [
-        { label: "Home", path: "/homepage" },
+        { label: "Home", path: "/" },
         { label: "Favorites", path: "/movies/favorites" },
         { label: "Upcoming Movies", path: "/movies/upcoming" },
         { label: "Trending Today", path: "/movies/trending" },

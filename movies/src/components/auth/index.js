@@ -9,7 +9,7 @@ const AuthenticationCheck = () => {
     const { isSignedIn, isLoaded } = useAuth();
 
     if (!isLoaded) {
-        return <h1>Loading....</h1>
+        return <Typography variant="h2">Loading....</Typography>
     }
 
     if (!isSignedIn){
@@ -35,10 +35,8 @@ const AuthenticationCheck = () => {
             </Grid>
         );
     }
-    
-    if (isLoaded && isSignedIn){
-        return <Outlet />
-    }
+
+    return <Outlet />
 
     
 }

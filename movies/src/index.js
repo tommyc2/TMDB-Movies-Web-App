@@ -17,7 +17,6 @@ import SimilarMoviesPage from "./pages/similarMoviesPage";
 import AnimatedCursor from "react-animated-cursor"
 import { ClerkProvider, SignIn, SignUp } from '@clerk/clerk-react'
 import AuthenticationCheck from "./components/auth";
-import { SignedIn, SignedOut, RedirectToSignIn, RedirectToSignUp } from "@clerk/clerk-react";
 
 const clerk_key = process.env.REACT_APP_CLERK_PUBLISHABLE_KEY
 
@@ -60,14 +59,14 @@ const App = () => {
             <MoviesContextProvider>
             <Routes>
 
-                <Route path="/sign-in" element={<SignIn signUpUrl="/sign-up" />} />
-                <Route path="/sign-up" element={<SignUp signInUrl="/sign-in" />} />
+                <Route path="/sign-in" element={<SignIn signUpUrl="/sign-up" afterSignInUrl="/" />} />
+                <Route path="/sign-up" element={<SignUp signInUrl="/sign-in" afterSignUpUrl="/" />} />
 
                 <Route element={<AuthenticationCheck />}>
                     <Route path="/reviews/:id" element={ <MovieReviewPage /> } />
                     <Route path="/movies/favorites" element={<FavoriteMoviesPage />} />
                     <Route path="/movies/:id" element={<MoviePage />} />
-                    <Route path="/homepage" element={<HomePage />} />
+                    <Route path="/" element={<HomePage />} />
                     <Route path="/movies/upcoming" element={<UpcomingMoviesPage />} />
                     <Route path="*" element={ <Navigate to="/" /> } />
                     <Route path="/reviews/form" element={ <AddMovieReviewPage /> } />
@@ -89,8 +88,6 @@ const rootElement = createRoot( document.getElementById("root") )
 rootElement.render(
     <ClerkProvider
       publishableKey={clerk_key}
-      signInFallbackRedirectUrl="/sign-in"
-      signUpFallbackRedirectUrl="/sign-up"
     >
         <App />
     </ClerkProvider>
