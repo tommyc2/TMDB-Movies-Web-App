@@ -51,6 +51,7 @@ Note: All environment variables should start with 'REACT_APP_' as this is a fron
 
 ### 3. Install the necessary packages required
  ```bash
+cd movies
 npm install
 ```
 ### 4. Start the program!
