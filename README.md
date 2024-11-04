@@ -34,7 +34,7 @@ To run the app locally, do the following:
 git clone https://github.com/tommyc2/TMDB-Movies-Web-App.git
 ~~~
 
-### 2. Create a file called .env in the root directory of your GitHub repository with the following values:
+### 2. Create a file called .env in the "movies" directory with the following values:
 
 <b>REACT_APP_TMDB_KEY: </b>You will need to generate an API key from TMDB (https://www.themoviedb.org/?language=en-IE). This will be the 'REACT_APP_TMDB_KEY' value.
 
